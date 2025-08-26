@@ -1,16 +1,11 @@
 const express = require("express");
 const router = express.Router();
+const { getComplaints, getComplaintById, updateComplaintStatus } = require("../controllers/rectorController");
 
-router.get("/complaints",(req,res)=>{
-    res.send("Get all the complaints");
-})
+router.get("/complaints",getComplaints)
 
-router.get("/complaints/:id",(req,res)=>{
-    res.send(`Get specific complaint ${req.params.id}`);
-})
+router.get("/complaints/:id",getComplaintById)
 
-router.put("/complaints/:id/status",(req,res)=>{
-    res.send(`Update complaint ${req.params.id} status`);
-})
+router.put("/complaints/:id/status",updateComplaintStatus)
 
 module.exports = router;
