@@ -1,24 +1,15 @@
 const express = require("express");
 const router = express.Router();
+const { getProfile, updateProfile, raiseComplaint, getMyComplaints, getComplaintById } = require("../controllers/studentController");
 
-router.get("/me",(req,res)=>{
-    res.send("Get student profile");
-});
+router.get("/me",getProfile);
 
-router.put("/me",(req,res)=>{
-    res.send("Update student profile");
-});
+router.put("/me",updateProfile);
 
-router.post("/complaints",(req,res)=>{
-    res.send("Raise new complaint");
-})
+router.post("/complaints",raiseComplaint);
 
-router.get("/complaints",(req,res)=>{
-    res.send("Get all the complaints");
-});
+router.get("/complaints",getMyComplaints);
 
-router.get("/complaints/:id",(req,res)=>{
-    res.send(`Get complaint with ID ${req.params.id}`);
-});
+router.get("/complaints/:id",getComplaintById);
 
 module.exports = router;

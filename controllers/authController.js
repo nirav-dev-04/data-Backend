@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const student = require('../models/student');
 const rector = require('../models/Rector');
-const admin = require('../models/admin');
+const admin = require('../models/Admin');
 
 //sign JWT
 const generateToken = (id,role) =>{
@@ -95,7 +95,7 @@ const loginUser = async (req,res) =>{
         return res.status(401).json({ message: "Invalid credentials "});
        }
 
-       const isMatch = await bcrypt.compare(password, hashedPassword);
+       const isMatch = await bcrypt.compare(password, user.password);
        if(!isMatch){
         return res.status(401).json({ message: "Invalid credentials"})
        }

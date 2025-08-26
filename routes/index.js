@@ -1,4 +1,5 @@
 const express = require("express");
+const app = express();
 const authRoutes = require("./authRoutes");
 const studentRoutes = require("./studentRoutes");
 const rectorRoutes = require("./rectorRoutes");
@@ -12,5 +13,7 @@ router.use("/students",studentRoutes);
 router.use("/rectors", rectorRoutes);
 router.use("/admins", adminRoutes);
 router.use("/complaints", complaintRoutes);
+
+app.listen(3000);
 
 module.exports = router;

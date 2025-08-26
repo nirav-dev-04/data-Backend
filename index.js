@@ -3,6 +3,7 @@ const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const dotenv = require("dotenv").config();
 const cors = require('cors'); 
 app.use(cors());
 app.use(express.json());
@@ -11,7 +12,7 @@ app.use(express.json());
   main().catch(err => console.log(err));
 
 async function main() {
-  await mongoose.connect('mongodb://127.0.0.1:27017/HostelManagement')
+  await mongoose.connect('mongodb+srv://kash1ish:k2114%40shish@cluster0.fme53.mongodb.net/')
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error('MongoDB connection error:', err));
 }
@@ -22,7 +23,8 @@ const Admin = require('./models/Admin');
 const Rector = require('./models/Rector');
 const Complaint = require('./models/Complaint');
 
-  
+const authRoutes = require("./routes/authRoutes");
+app.use("/api/auth",authRoutes);
 app.get('/',(req,res)=>{
    res.send("Welcome to the Hostel Management System API");
 })
