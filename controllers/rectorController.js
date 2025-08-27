@@ -1,6 +1,5 @@
-const rector = require("../models/Rector");
-const complaint = require("../models/Complaint");
-const student = require("../models/Student");
+const Complaint = require("../models/Complaint");
+const Student = require("../models/Student");
 const Rector = require("../models/Rector");
 
 
@@ -12,7 +11,7 @@ const getComplaints = async(req,res,next) =>{
             return res.status(404).json({ message: "Rector not found" });
         }
 
-        const students = await student.find({ hostelBlock: rector.hostelBlock }).select("_id");
+        const students = await Student.find({ hostelBlock: rector.hostelBlock }).select("_id");
 
         const studentIds = students.map((s)=> s._id);
 
@@ -26,7 +25,7 @@ const getComplaints = async(req,res,next) =>{
 
 const getComplaintById = async (req,res,next) =>{
     try{
-        const rector = await rector.findBy(req.user.id);
+        const rector = await Rector.findById(req.user.id);
         if(!rector){
             return res.status(404).json({ message: "Rector not found "});
         }
@@ -59,7 +58,7 @@ const updateComplaintStatus = async(req,res,next)=>{
             return res.status(404).json({ message: "Rector not found"})
         }
         
-        const complaint = await Complaint.findById(req.params.id).populate("studenId", "hostelBlock");
+        const complaint = await Complaint.findById(req.params.id).populate("studentId", "hostelBlock");
 
         if(!complaint){
             return res.status(404).json({ message: "Complaint not found"});
@@ -78,7 +77,7 @@ const updateComplaintStatus = async(req,res,next)=>{
             complaint
         });
     }
-    catch{err}{
+    catch(err){
         next(err);
     }
 }

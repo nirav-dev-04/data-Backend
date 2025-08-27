@@ -1,9 +1,9 @@
-const student = require("../models/Student");
-const complaint = require("../models/Complaint");
+const Student = require("../models/Student");
+const Complaint = require("../models/Complaint");
 
 const getProfile = async(req,res,next) =>{
     try{
-        const student = await student.findbyId(req.user.id).select("-password");
+        const student = await Student.findById(req.user.id).select("-password");
         if(!student){
             return res.status(404).json({ message: "Student not found "});
         }
@@ -17,7 +17,7 @@ const getProfile = async(req,res,next) =>{
 const updateProfile = async (req,res,next) =>{
     try{
         const updates = req.body;
-        const student = await student.findbyIdAndUpdate(req.user.id,updates,{
+        const student = await Student.findByIdAndUpdate(req.user.id,updates,{
             new:true,
         }).select("-password");
 

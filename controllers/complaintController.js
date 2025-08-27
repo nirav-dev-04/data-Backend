@@ -1,4 +1,4 @@
-const complaint = require("../models/Complaint");
+const Complaint = require("../models/Complaint");
 
 const getAllComplaints = async (req, res, next) => {
   try {

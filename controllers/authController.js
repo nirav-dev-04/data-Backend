@@ -1,8 +1,8 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const student = require('../models/Student');
-const rector = require('../models/Rector');
-const admin = require('../models/Admin');
+const Student = require('../models/Student');
+const Rector = require('../models/Rector');
+const Admin = require('../models/Admin');
 
 //sign JWT
 const generateToken = (id,role) =>{
@@ -23,9 +23,9 @@ const registerUser = async(req,res) => {
         }
 
         //checks if user already exists 
-        let existingUser = (await student.findOne({ email })) || 
-                           (await rector.findOne({ email }))  ||
-                           (await admin.findOne({ email }));
+        let existingUser = (await Student.findOne({ email })) || 
+                           (await Rector.findOne({ email }))  ||
+                           (await Admin.findOne({ email }));
 
         if(existingUser){
             return res.status(400).json({
@@ -40,21 +40,21 @@ const registerUser = async(req,res) => {
         //create new user
         let user;
         if(role === 'student'){
-            user = await student.create({
+            user = await Student.create({
                 userName, 
                 email,
                 password: hashedPassword
             });
         }
         else if(role === 'rector'){
-            user = await rector.create({
+            user = await Rector.create({
                 userName,
                 email,
                 password: hashedPassword
             });
         }
         else if(role === 'admin'){
-            user = await admin.create({
+            user = await Admin.create({
                 userName,
                 email,
                 password: hashedPassword
@@ -62,7 +62,7 @@ const registerUser = async(req,res) => {
         }
         else{
             return res.status(400).json({
-                message: "Inavalid role"
+                message: "Invalid role"
             });
         }
 
@@ -87,9 +87,9 @@ const loginUser = async (req,res) =>{
     try{
         const { email, password } = req.body;
 
-        let user = (await student.findOne({ email })) || 
-                    (await rector.findOne({ email }))  ||
-                    (await admin.findOne({ email }));
+        let user = (await Student.findOne({ email })) || 
+                    (await Rector.findOne({ email }))  ||
+                    (await Admin.findOne({ email }));
 
        if(!user){
         return res.status(401).json({ message: "Invalid credentials "});
@@ -101,8 +101,8 @@ const loginUser = async (req,res) =>{
        }
 
        let role = "student";
-       if(user instanceof rector) role = "rector";
-       if(user instanceof admin) role = "admin";
+       if(user instanceof Rector) role = "rector";
+       if(user instanceof Admin) role = "admin";
 
        res.json({
         success: true,
