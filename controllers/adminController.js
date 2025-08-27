@@ -4,7 +4,8 @@ const admin = require("../models/Admin");
 const complaint = require("../models/Complaint");
 
 const getAllUsers = async (req, res, next) => {
-  try {
+  try 
+  {
     const students = await student.find().select("-password");
     const rectors = await rector.find().select("-password");
     const admins = await admin.find().select("-password");
