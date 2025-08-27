@@ -1,32 +1,20 @@
 const express = require("express");
 const router = express.Router();
+const {getAllUsers,getUserById,addRector,removeRector,getAllComplaints,
+    getComplaintById,deleteComplaint,} = require("../controllers/adminController");
 
-router.get("/users",(req,res)=>{
-    res.send("Get all users");
-})
+router.get("/users",getAllUsers)
 
-router.get("/users/:id",(req,res)=>{
-    res.send(`Get user with ID ${req.params.id}`);
-})
+router.get("/users/:id",getUserById)
 
-router.post("/rectors",(req,res)=>{
-    res.send("Add a rector");
-})
+router.post("/rectors",addRector)
 
-router.delete("/rectors/:id",(req,res)=>{
-    res.send(`Remove rector with id ${req.params.id}`);
-})
+router.delete("/rectors/:id",removeRector)
 
-router.get("/complaints",(req,res)=>{
-    res.send("Get all the complaints across hostels");
-})
+router.get("/complaints",getAllComplaints)
 
-router.get("/complaints/:id",(req,res)=>{
-    res.send(`Get complaint with id ${req.params.id}`);
-})
+router.get("/complaints/:id",getComplaintById)
 
-router.delete("/complaints/:id",(req,res)=>{
-    res.send(`Delete complaint with id ${req.params.id}`);
-})
+router.delete("/complaints/:id",deleteComplaint)
 
 module.exports = router;

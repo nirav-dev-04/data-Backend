@@ -3,7 +3,7 @@ const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const dotenv = require("dotenv").config();
+require("dotenv").config();
 const cors = require('cors'); 
 app.use(cors());
 app.use(express.json());
@@ -12,7 +12,7 @@ app.use(express.json());
   main().catch(err => console.log(err));
 
 async function main() {
-  await mongoose.connect('mongodb+srv://kash1ish:k2114%40shish@cluster0.fme53.mongodb.net/')
+  await mongoose.connect('mongodb://127.0.0.1:27017/HostelManagement')
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error('MongoDB connection error:', err));
 }
@@ -20,11 +20,22 @@ async function main() {
 // Import your models here (optional, but useful if you want to test or use them here)
 const Student = require('./models/student');
 const Admin = require('./models/Admin');
-const Rector = require('./models/Rector');
+const Rector = require('./models/rector');
 const Complaint = require('./models/Complaint');
 
+// Import route files
 const authRoutes = require("./routes/authRoutes");
-app.use("/api/auth",authRoutes);
+const studentRoutes = require("./routes/studentRoutes");
+const rectorRoutes = require("./routes/rectorRoutes");
+const adminRoutes = require("./routes/adminRoutes");
+const complaintRoutes = require("./routes/complaintRoutes");
+
+app.use("/api/auth", authRoutes);
+app.use("/api/students", studentRoutes);
+app.use("/api/rectors", rectorRoutes);
+app.use("/api/admins", adminRoutes);
+app.use("/api/complaints", complaintRoutes);
+
 app.get('/',(req,res)=>{
    res.send("Welcome to the Hostel Management System API");
 })
