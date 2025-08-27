@@ -1,5 +1,5 @@
-const student = require("../models/student");
-const rector = require("../models/rector");
+const student = require("../models/Student");
+const rector = require("../models/Rector");
 const admin = require("../models/Admin");
 const complaint = require("../models/Complaint");
 

@@ -18,9 +18,9 @@ async function main() {
 }
 
 // Import your models here (optional, but useful if you want to test or use them here)
-const Student = require('./models/student');
+const Student = require('./models/Student');
 const Admin = require('./models/Admin');
-const Rector = require('./models/rector');
+const Rector = require('./models/Rector');
 const Complaint = require('./models/Complaint');
 
 // Import route files

@@ -1,8 +1,8 @@
-const rector = require("../models/rector");
+const rector = require("../models/Rector");
 const complaint = require("../models/Complaint");
-const student = require("../models/student");
-const Rector = require("../models/rector");
-const Complaint = require("../models/Complaint");
+const student = require("../models/Student");
+const Rector = require("../models/Rector");
+
 
 const getComplaints = async(req,res,next) =>{
     try{

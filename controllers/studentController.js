@@ -1,8 +1,5 @@
-const student = require("../models/student");
+const student = require("../models/Student");
 const complaint = require("../models/Complaint");
-const student = require("../models/student");
-const student = require("../models/student");
-const Complaint = require("../models/Complaint");
 
 const getProfile = async(req,res,next) =>{
     try{
