@@ -1,18 +1,20 @@
 const express = require("express");
 const router = express.Router();
 const { getAllComplaints, getComplaintById, createComplaint,updateComplaint,deleteComplaint } = require("../controllers/complaintController");
+const authMiddleware = require("../middlewares/authMiddleware");
+const {validateComplaint}  = require("../middlewares/validateMiddleware");
 
-router.get("/",getAllComplaints)
+router.get("/",authMiddleware,getAllComplaints)
 
-router.get("/:id",getComplaintById)
+router.get("/:id",authMiddleware,getComplaintById)
 
 //need to authorize student first
-router.post("/", createComplaint)
+router.post("/", authMiddleware, validateComplaint,createComplaint)
 
 //need to authorize student first
-router.put("/:id",updateComplaint)
+router.put("/:id", authMiddleware, validateComplaint,updateComplaint)
 
 //need to authorize admin first
-router.delete('/:id',deleteComplaint);
+router.delete('/:id',authMiddleware,deleteComplaint);
 
 module.exports = router;

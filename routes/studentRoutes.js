@@ -1,15 +1,17 @@
 const express = require("express");
 const router = express.Router();
 const { getProfile, updateProfile, raiseComplaint, getMyComplaints, getComplaintById } = require("../controllers/studentController");
+const authMiddleware = require("../middlewares/authMiddleware");
+const { validateComplaint } = require("../middlewares/validateMiddleware");
 
-router.get("/me",getProfile);
+router.get("/me",authMiddleware,getProfile);
 
-router.put("/me",updateProfile);
+router.put("/me",authMiddleware,updateProfile);
 
-router.post("/complaints",raiseComplaint);
+router.post("/complaints",authMiddleware,validateComplaint,raiseComplaint);
 
-router.get("/complaints",getMyComplaints);
+router.get("/complaints",authMiddleware,getMyComplaints);
 
-router.get("/complaints/:id",getComplaintById);
+router.get("/complaints/:id",authMiddleware,getComplaintById);
 
 module.exports = router;
